@@ -55,14 +55,14 @@ type
     property Canvas;
     property SelectedRows;
   published
-    property EditSearcFound_Color: TColor read fEditSearcFound_Color
-                                         write fEditSearcFound_Color stored True;
+    property EditSearcFound_Color: TColor read fEditSearch_Found_Color
+                                         write fEditSearch_Found_Color stored True;
 
-    property EditSearcNotFound_Color: TColor read fEditSearcNotFound_Color
-                                         write fEditSearcNotFound_Color stored True;
+    property EditSearcNotFound_Color: TColor read fEditSearch_NotFound_Color
+                                         write fEditSearch_NotFound_Color stored True;
 
-    property EditSearcStartEmpty_Color: TColor read fEditSearcStartEmpty_Color
-                                         write fEditSearcStartEmpty_Color stored True;
+    property EditSearcStartEmpty_Color: TColor read fEditSearch_StartEmpty_Color
+                                         write fEditSearch_StartEmpty_Color stored True;
 
 //    property AutoAdjustColumns: Boolean read fAutoAdjustColumns
 //                                        write fAutoAdjustColumns stored True;
@@ -171,7 +171,7 @@ begin inherited;
     fEdit_Search.Width    := 0;
     fEdit_Search.Height   := 0;
     fEdit_Search.Anchors  := [];
-    fEdit_Search.Color := fEditSearcStartEmpty_Color;
+    fEdit_Search.Color := fEditSearch_StartEmpty_Color;
 //    fEdit.Clear; // do not call it here where the handle not created yet.. to avoid error control has no parent window!!
     fEdit_Search.OnExit   := EditOnExit;
     fEdit_Search.OnChange := EditOnChange;
@@ -211,7 +211,9 @@ begin
 
   UpdateEditPosition;
 
-  if not (fLast_IsFound)and(fLast_SelectedColumn <> fSelectedColumn) then fEdit_Search.Clear;
+  if not fLast_IsFound then fEdit_Search.Clear;
+  if fLast_IsFound then
+    if (fLast_SelectedColumn <> fSelectedColumn) then fEdit_Search.Clear;
   
   fEdit_Search.Visible  := True;
   fEdit_Search.BringToFront;
@@ -269,11 +271,11 @@ begin
     ApplyFilter(fSelectedColumn, fFilterText);
     if lDataSet.RecordCount > 0 then begin
       fEdit_Search.Color   := fEditSearch_Found_Color;
-      fLastIsFound         := True;
+      fLast_IsFound        := True;
       fLast_SelectedColumn := fSelectedColumn;
     end else begin
       fEdit_Search.Color := fEditSearch_NotFound_Color;
-      fLastIsFound       := False;
+      fLast_IsFound      := False;
     end;
   end else begin
     lDataSet.Filtered  := False;
