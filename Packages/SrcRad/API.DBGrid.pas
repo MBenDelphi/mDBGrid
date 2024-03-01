@@ -24,10 +24,11 @@ type
   private
     fSelectedColumn: Integer;
     fEdit_Search: TEdit;
-    fLastIsFound: Boolean;
-    fEditSearcFound_Color: TColor;
-    fEditSearcNotFound_Color: TColor;
-    fEditSearcStartEmpty_Color: TColor;
+    fLast_IsFound: Boolean;
+    fLast_SelectedColumn: Integer;
+    fEditSearch_Found_Color: TColor;
+    fEditSearch_NotFound_Color: TColor;
+    fEditSearch_StartEmpty_Color: TColor;
     fParentForm: TCustomForm;
     fParentFormCaption: string;
 //    fAutoAdjustColumns: Boolean;
@@ -154,15 +155,17 @@ end;
 constructor TmDBGrid_.Create(AOwner: TComponent);
 begin inherited;
 
- fEditSearcFound_Color := $0091EE91;
- fEditSearcNotFound_Color := $00BCB0FF;
- fEditSearcStartEmpty_Color := $00E7A0B7;
- fLastIsFound := False;
-
-  fSelectedColumn := -1; // No column initially selected for filtering
+  fEditSearch_Found_Color      := $0091EE91;
+  fEditSearch_NotFound_Color   := $00BCB0FF;
+  fEditSearch_StartEmpty_Color := $00E7A0B7;
+ 
+  fLast_IsFound        := False; // Logically No Search is Found Before..
+  fLast_SelectedColumn := -1;    // Logically No column is Selected Before..
+ 
+  fSelectedColumn      := -1; // No column initially selected for filtering
 
   fEdit_Search := TEdit.Create(Self);
-    fEdit_Search.Parent   := Self; // in order to OnChange event Edit triggered  correctlly..
+    fEdit_Search.Parent   := Self; 
     fEdit_Search.Visible  := False;
     fEdit_Search.AutoSize := False;
     fEdit_Search.Width    := 0;
@@ -179,8 +182,8 @@ procedure TmDBGrid_.CreateWnd;
 begin
   inherited;
 
-  fParentForm         := TForm(Owner);
-  fEdit_Search.Parent := fParentForm;
+  fParentForm         := GetParentForm(Self); //TForm(Owner);
+  fEdit_Search.Parent := fParentForm;  // in order to OnChange event Edit triggered  correctlly..
 
   TForm(fParentForm).OnMouseDown := ParentFormMouseDown;
 
@@ -208,7 +211,7 @@ begin
 
   UpdateEditPosition;
 
-  if not fLastIsFound then fEdit_Search.Clear;
+  if not (fLast_IsFound)and(fLast_SelectedColumn <> fSelectedColumn) then fEdit_Search.Clear;
   
   fEdit_Search.Visible  := True;
   fEdit_Search.BringToFront;
@@ -265,16 +268,17 @@ begin
   if (fFilterText <> '') then  begin
     ApplyFilter(fSelectedColumn, fFilterText);
     if lDataSet.RecordCount > 0 then begin
-      fEdit_Search.Color := fEditSearcFound_Color;
-      fLastIsFound       := True;
+      fEdit_Search.Color   := fEditSearch_Found_Color;
+      fLastIsFound         := True;
+      fLast_SelectedColumn := fSelectedColumn;
     end else begin
-      fEdit_Search.Color := fEditSearcNotFound_Color;
+      fEdit_Search.Color := fEditSearch_NotFound_Color;
       fLastIsFound       := False;
     end;
   end else begin
     lDataSet.Filtered  := False;
     lDataSet.Filter    := '';
-    fEdit_Search.Color := fEditSearcStartEmpty_Color;
+    fEdit_Search.Color := fEditSearch_StartEmpty_Color;
   end;
 
 end;
@@ -330,8 +334,8 @@ begin inherited;
     lDataSet := DataSource.DataSet;
 
     if (lDataSet.RecordCount > 0) then begin
-      fSelectedColumn := Column.Index;
-      fEdit_Search.Color     := fEditSearcStartEmpty_Color;
+      fSelectedColumn        := Column.Index;
+      fEdit_Search.Color     := fEditSearch_StartEmpty_Color;
       fEdit_Search.Alignment := Column.Title.Alignment;
       ShowEdit;
     end;
