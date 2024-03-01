@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>2024/02/29 03:42:38.000.424,D:\Projects2024\ProjectGroup1.groupproj=D:\Projects2024\DBGridColumnFilter\MBen_Controls_Grp_Rad.groupproj</Transaction>
+    <Transaction>2024/02/29 03:42:38.000.424,D:\Projects2024\DBGridColumnFilter\MBen_Controls_Grp_Rad.groupproj=D:\Projects2024\ProjectGroup1.groupproj</Transaction>
   </Transactions>
 	<Default.Personality>
-		<Projects ActiveProject="D:\Projects2024\DBGridColumnFilter\Packages\SrcRad\Demo\mDBGrid_Test.dproj"/>
+		<Projects ActiveProject="D:\Projects2024\DBGridColumnFilter\Packages\SrcRad\mDBGrid_DPK.dproj"/>
 	</Default.Personality>
 </BorlandProject>

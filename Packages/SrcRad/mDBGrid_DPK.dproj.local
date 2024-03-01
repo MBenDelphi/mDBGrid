@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-  <Transactions>
-    <Transaction>2024/03/01 01:02:21.816,=rtl.dcp</Transaction>
-    <Transaction>2024/03/01 01:02:56.141,D:\Projects2024\DBGridColumnFilter\Packages\SrcRad\mDBGrid_DPK.dproj=D:\Projects2024\Package1.dproj</Transaction>
-    <Transaction>2024/03/01 01:03:05.510,=D:\Projects2024\DBGridColumnFilter\Packages\SrcRad\API.DBGrid.pas</Transaction>
-    <Transaction>2024/03/01 01:06:47.857,=vcl.dcp</Transaction>
-    <Transaction>2024/03/01 01:06:47.881,=dbrtl.dcp</Transaction>
-    <Transaction>2024/03/01 01:06:47.906,=vclwinx.dcp</Transaction>
-    <Transaction>2024/03/01 01:06:47.966,=vcldb.dcp</Transaction>
+	<Transactions>
+    <Transaction>2024/03/01 01:02:21.000.816,=rtl.dcp</Transaction>
+    <Transaction>2024/03/01 01:02:56.000.141,D:\Projects2024\DBGridColumnFilter\Packages\SrcRad\mDBGrid_DPK.dproj=D:\Projects2024\Package1.dproj</Transaction>
+    <Transaction>2024/03/01 01:03:05.000.510,=D:\Projects2024\DBGridColumnFilter\Packages\SrcRad\API.DBGrid.pas</Transaction>
+    <Transaction>2024/03/01 01:06:47.000.857,=vcl.dcp</Transaction>
+    <Transaction>2024/03/01 01:06:47.000.881,=dbrtl.dcp</Transaction>
+    <Transaction>2024/03/01 01:06:47.000.906,=vclwinx.dcp</Transaction>
+    <Transaction>2024/03/01 01:06:47.000.966,=vcldb.dcp</Transaction>
   </Transactions>
 </BorlandProject>
