@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{243BF69A-1CD3-4D47-A2BC-5553ADB4F9F7}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="mDBGrid_DPK.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Demo\mDBGrid_Test.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="mDBGrid_DPK">
+        <MSBuild Projects="mDBGrid_DPK.dproj"/>
+    </Target>
+    <Target Name="mDBGrid_DPK:Clean">
+        <MSBuild Projects="mDBGrid_DPK.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="mDBGrid_DPK:Make">
+        <MSBuild Projects="mDBGrid_DPK.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="mDBGrid_Test">
+        <MSBuild Projects="Demo\mDBGrid_Test.dproj"/>
+    </Target>
+    <Target Name="mDBGrid_Test:Clean">
+        <MSBuild Projects="Demo\mDBGrid_Test.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="mDBGrid_Test:Make">
+        <MSBuild Projects="Demo\mDBGrid_Test.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="mDBGrid_DPK;mDBGrid_Test"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="mDBGrid_DPK:Clean;mDBGrid_Test:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="mDBGrid_DPK:Make;mDBGrid_Test:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
